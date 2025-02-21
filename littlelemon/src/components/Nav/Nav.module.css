@@ -1,0 +1,13 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  grid-template-areas: "logo links";
+  justify-content: center;
+}
+
+.logo {
+  grid-area: logo;
+}
+.links {
+  grid-area: links;
+}
