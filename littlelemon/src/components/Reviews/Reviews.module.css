@@ -1,0 +1,32 @@
+.testimonial {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "img name" "img rating" "review review";
+}
+
+.img {
+  grid-area: img;
+}
+
+.name {
+  grid-area: name;
+}
+
+.review {
+  grid-area: review;
+}
+
+.rating {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "number star";
+  grid-area: rating;
+}
+
+.number {
+  grid-area: number;
+}
+
+.star {
+  grid-area: star;
+}

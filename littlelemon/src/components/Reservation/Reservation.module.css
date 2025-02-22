@@ -1,0 +1,26 @@
+.bg {
+  background-color: #f7f7f7;
+}
+
+.select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "select1 select2" "date time";
+  gap: 0.5rem;
+}
+
+.select1 {
+  grid-area: select1;
+}
+
+.select2 {
+  grid-area: select2;
+}
+
+.date {
+  grid-area: date;
+}
+
+.time {
+  grid-area: time;
+}

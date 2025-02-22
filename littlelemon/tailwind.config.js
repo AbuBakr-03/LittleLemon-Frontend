@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        markazi: ["Markazi Text", "serif"],
+        karla: ["Karla", "sans-serif"], // Add Karla here
+      },
+    },
   },
   plugins: [],
 };

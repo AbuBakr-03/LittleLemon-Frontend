@@ -1,3 +1,6 @@
+@import "@fontsource/markazi-text";
+@import "@fontsource/karla";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

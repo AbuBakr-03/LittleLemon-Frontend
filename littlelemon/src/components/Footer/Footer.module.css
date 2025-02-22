@@ -1,0 +1,41 @@
+.container {
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+  grid-template-areas: "img nav address social";
+  align-content: center;
+}
+.bg {
+  background-color: #495e57;
+}
+.img {
+  width: 50%;
+  aspect-ratio: 9/16;
+  object-fit: cover;
+}
+.imgcont {
+  grid-area: img;
+}
+.nav {
+  grid-area: nav;
+}
+.address {
+  grid-area: address;
+}
+.social {
+  grid-area: social;
+}
+
+@media screen and (max-width: 768px) {
+  .imgcont {
+    display: grid;
+    justify-items: center;
+  }
+  .container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "img img" "nav social" "address address";
+    gap: 2rem;
+  }
+
+  .img {
+    width: 25%; /* Adjust logo size */
+  }
+}
