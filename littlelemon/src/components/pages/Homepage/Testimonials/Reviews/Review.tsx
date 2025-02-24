@@ -1,5 +1,5 @@
 import styles from "./Reviews.module.css";
-import star from "../../assets/star.png";
+import star from "../../../../../assets/star.png";
 type propTypes = {
   avatar: string;
   name: string;
@@ -21,7 +21,7 @@ const Reviews: React.FC<propTypes> = ({
         src={avatar}
         alt="avatar"
       />
-      <p className={`${styles.name} font-markazi place-self-center text-2xl`}>
+      <p className={`${styles.name} place-self-center font-markazi text-2xl`}>
         {name}
       </p>
       <div
@@ -34,7 +34,9 @@ const Reviews: React.FC<propTypes> = ({
           alt="star"
         />
       </div>
-      <p className={`${styles.review} font-karla h-16 md:h-32 place-self-center`}>
+      <p
+        className={`${styles.review} h-16 place-self-center font-karla md:h-32`}
+      >
         {description}
       </p>
     </div>

@@ -1,5 +1,5 @@
-import MandA1 from "../../assets/Mario and Adrian A.jpg";
-import MandA2 from "../../assets/Mario and Adrian b.jpg";
+import MandA1 from "../../../../assets/Mario and Adrian A.jpg";
+import MandA2 from "../../../../assets/Mario and Adrian b.jpg";
 import styles from "./About.module.css";
 const About: React.FC = () => {
   return (

@@ -1,4 +1,11 @@
 {
+  "compilerOptions": {
+    "types": ["vitest"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true
+  },
+
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

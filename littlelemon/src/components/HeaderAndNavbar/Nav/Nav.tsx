@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, RefObject } from "react";
-import Logo from "../../assets/Logo.svg";
+import Logo from "../../../assets/Logo.svg";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOnClickOutside } from "usehooks-ts";
@@ -147,7 +147,7 @@ const Nav: React.FC = () => {
                 <li
                   className={`border-b-2 border-transparent transition-all duration-300 hover:border-black`}
                 >
-                  <Link to={""}>Home</Link>
+                  <Link to={"/"}>Home</Link>
                 </li>
                 <li
                   className={`border-b-2 border-transparent transition-all duration-300 hover:border-black`}

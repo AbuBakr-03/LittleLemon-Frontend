@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import pic from "../../assets/restauranfood.jpg";
+import pic from "../../../../assets/restauranfood.jpg";
 import styles from "./Jumbotron.module.css";
 const Jumbotron: React.FC = () => {
   const navigate = useNavigate();

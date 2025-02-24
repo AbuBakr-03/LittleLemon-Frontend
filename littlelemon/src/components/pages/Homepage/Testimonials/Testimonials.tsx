@@ -1,6 +1,6 @@
 import styles from "./Testimonials.module.css";
-import avatar from "../../assets/Default_pfp.svg.webp";
-import Reviews from "../Reviews/Review";
+import avatar from "../../../../assets/Default_pfp.svg.webp";
+import Reviews from "./Reviews/Review";
 const Testimonials: React.FC = () => {
   return (
     <article className={`grid justify-items-center ${styles.bg}`}>

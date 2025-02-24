@@ -4,7 +4,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import Header from "../../Header/Header";
 const Reservation: React.FC = () => {
   const [count, setCount] = useState<number>(1);
   const navigate = useNavigate();
@@ -44,7 +43,6 @@ const Reservation: React.FC = () => {
   };
   return (
     <>
-      <Header></Header>
       <article className={`grid justify-items-center`}>
         <div className={`grid w-9/12 justify-items-center lg:w-6/12`}>
           <form
@@ -150,8 +148,6 @@ const Reservation: React.FC = () => {
                 className={`rounded border-2 border-slate-200 pl-2`}
                 name="comment"
                 id="comment"
-                cols="30"
-                rows="5"
               ></textarea>
               {errors.Comment && <p>{errors.Comment.message}</p>}
               <div className="my-2 grid place-self-center">

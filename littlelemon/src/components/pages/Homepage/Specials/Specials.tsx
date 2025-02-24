@@ -1,15 +1,15 @@
-import Button from "../Button/Button";
-import bruschetta from "../../assets/Tomato-Bruschetta-Bread-6.jpg";
-import lemondessert from "../../assets/lemon dessert.jpg";
-import greeksalad from "../../assets/greek salad.jpg";
-import MenuItems from "../MenuItems/MenuItems";
+import Button from "../../../Button/Button";
+import bruschetta from "../../../../assets/Tomato-Bruschetta-Bread-6.jpg";
+import lemondessert from "../../../../assets/lemon dessert.jpg";
+import greeksalad from "../../../../assets/greek salad.jpg";
+import MenuItems from "./MenuItems/MenuItems";
 const Specials: React.FC = () => {
   return (
     <article className={`grid justify-items-center py-8`}>
       <div className={`grid w-9/12 gap-8`}>
         <div className={`grid grid-cols-2 place-items-center`}>
           <h1
-            className={`font-markazi justify-self-start text-3xl font-medium`}
+            className={`justify-self-start font-markazi text-3xl font-medium`}
           >
             Specials
           </h1>
