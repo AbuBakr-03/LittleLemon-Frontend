@@ -17,9 +17,10 @@ function App() {
     comment: string;
   };
   const submitAPI = function (formData: formtype) {
-    console.log(formData);
+    console.log("submitAPI called with:", formData);
     return true;
   };
+
   const seededRandom = function (seed: number) {
     const m = 2 ** 35 - 31;
     const a = 185852;

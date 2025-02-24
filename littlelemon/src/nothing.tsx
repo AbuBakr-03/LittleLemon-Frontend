@@ -1,90 +1,177 @@
 import { useState } from "react";
 import styles from "./Bookingform.module.css";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-const Reservation: React.FC = () => {
-  const [count, setCount] = useState<number>(1);
-  const navigate = useNavigate();
-  const increment = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    setCount((c) => c + 1);
-  };
-  const decrement = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    if (count > 1) {
-      setCount((c) => c - 1);
-    }
-  };
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type actiontype = {
+  type: "update";
+  date: Date;
+};
+
+type formtype = {
+  name: string;
+  email: string;
+  phone: string;
+  diners: number;
+  occasion: string;
+  date: string;
+  time: string;
+  comment: string;
+};
+
+type propstype = {
+  times: string[];
+  dispatcher: React.ActionDispatch<[action: actiontype]>;
+  submit: (formData: formtype) => boolean;
+};
+
+const Reservation: React.FC<propstype> = ({ times, dispatcher, submit }) => {
   const schema = z.object({
-    Name: z.string().min(4),
-    Phone: z.string().min(4),
-    Email: z.string().email(),
-    Date: z.coerce.date().refine(
-      (val) => !isNaN(val.getTime()), // Ensure it's a valid date
-      {
-        message: "Invalid date",
-      },
-    ),
-    Comment: z.string().max(300),
-    Time: z.string(),
+    name: z.string().min(3),
+    email: z.string().email(),
+    phone: z.string().min(7),
+    diners: z.number().min(1).max(10),
+    occasion: z.string(),
+    date: z.string(),
+    time: z.string(),
+    comment: z.string().max(300),
   });
-  type FormType = z.infer<typeof schema>;
+
+  type formTypes = z.infer<typeof schema>;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormType>({
+  } = useForm<formTypes>({
+    defaultValues: {},
     resolver: zodResolver(schema),
   });
-  const onSubmit: SubmitHandler<FormType> = () => {
-    navigate("/Reservations/Success");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    diners: 1,
+    occasion: "1",
+    date: "",
+    time: "1",
+    comment: "",
+  });
+
+  const listofTimes = times.map((x, index) => {
+    return (
+      <option key={index} value={x}>
+        {x}
+      </option>
+    );
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
+    if (e.target.name === "date") {
+      dispatcher({ type: "update", date: new Date(e.target.value) });
+    }
+    setFormData((f) => ({
+      ...f,
+      [e.target.name]: e.target.value,
+    }));
   };
+
+  const increment = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (formData.diners < 10) {
+      setFormData((c) => ({ ...c, diners: c.diners + 1 }));
+    }
+  };
+
+  const decrement = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (formData.diners > 1) {
+      setFormData((c) => ({ ...c, diners: c.diners - 1 }));
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const submiter: SubmitHandler<formTypes> = (data) => {
+    console.log("submiter is running!", data); // This must log
+    if (submit(data)) {
+      console.log("Navigation should happen now...");
+      navigate("/Reservations/Success");
+    } else {
+      console.log("Submit function returned false, navigation blocked.");
+    }
+  };
+
   return (
     <>
       <article className={`grid justify-items-center`}>
         <div className={`grid w-9/12 justify-items-center lg:w-6/12`}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
             className={`m-6 grid w-10/12 gap-4 rounded-lg border border-slate-200 p-6 shadow`}
-            action=""
+            onSubmit={(e) => {
+              e.preventDefault();
+              console.log("Form is being submitted!"); // Should log
+              console.log("Validation Errors:", errors); // Check if errors exist
+
+              handleSubmit(submiter)(e);
+            }}
           >
             <h1 className={`font-markazi text-3xl`}>Reserve a Table</h1>
             <div className={`grid gap-1 font-markazi text-lg`}>
-              <label htmlFor="Name">Name:</label>
+              <label htmlFor="name">Name:</label>
               <input
-                {...register("Name")}
+                value={formData.name}
                 className={`rounded border-2 border-slate-200 pl-2`}
                 type="text"
-                name="Name"
                 id="name"
+                {...register("name")}
+                onChange={(e) => {
+                  register("name").onChange(e); // Ensure React Hook Form updates its state
+                  handleChange(e); // Your custom function that tracks e.target.name
+                }}
               />
-              {errors.Name && (
-                <p className="text-red-600">{errors.Name.message}</p>
+              {errors.name && (
+                <p className="text-red-600">Enter a valid name.</p>
               )}
-              <label htmlFor="Email">Email:</label>
+              <label htmlFor="email">Email:</label>
               <input
-                {...register("Email")}
                 className={`rounded border-2 border-slate-200 pl-2`}
                 type="email"
-                name="Email"
-                id="Email"
+                id="email"
+                {...register("email")}
+                onChange={(e) => {
+                  register("email").onChange(e);
+                  handleChange(e);
+                }}
+                value={formData.email}
               />
-              {errors.Email && (
-                <p className="text-red-600">{errors.Email.message}</p>
+              {errors.email && (
+                <p className="text-red-600">Enter a valid Email.</p>
               )}
-              <label htmlFor="Phone">Phone:</label>
+              <label htmlFor="phone">Phone:</label>
               <input
-                {...register("Phone")}
+                {...register("phone")}
+                onChange={(e) => {
+                  register("phone").onChange(e);
+                  handleChange(e);
+                }}
+                value={formData.phone}
                 className={`rounded border-2 border-slate-200 pl-2`}
                 type="tel"
-                name="Phone"
+                name="phone"
                 id="phone"
               />
-              {errors.Phone && (
-                <p className="text-red-600">Enter Valid Phone Number</p>
+              {errors.phone && (
+                <p className="text-red-600">Enter a valid phone number.</p>
               )}
+
               <p>Number of Diners:</p>
               <div
                 className={`grid w-1/2 grid-cols-3 justify-items-center justify-self-center rounded py-1`}
@@ -100,7 +187,7 @@ const Reservation: React.FC = () => {
                 <p
                   className={`w-full border border-slate-200 bg-slate-100 text-center text-xl font-medium`}
                 >
-                  {count}
+                  {formData.diners}
                 </p>
                 <button
                   onClick={(e) => {
@@ -111,45 +198,77 @@ const Reservation: React.FC = () => {
                   +
                 </button>
               </div>
+              <label htmlFor="occasion">Select Occasion:</label>
+              <select
+                {...register("occasion")}
+                onChange={(e) => {
+                  register("occasion").onChange(e);
+                  handleChange(e);
+                }}
+                value={formData.occasion}
+                name="occasion"
+                id="ocassion"
+                className="rounded border-2 border-slate-200 py-1 pl-2"
+              >
+                <option value="1">Birthday</option>
+                <option value="2">Anniversary</option>
+                <option value="3">Engagement</option>
+              </select>
+              {errors.occasion && (
+                <p className="text-red-600">Choose an occasion.</p>
+              )}
               <div className={`${styles.select} my-1`}>
-                <label className={`${styles.select1}`} htmlFor="Date">
+                <label className={`${styles.select1}`} htmlFor="date">
                   Select Date:
                 </label>
                 <input
-                  {...register("Date")}
+                  {...register("date")}
+                  onChange={(e) => {
+                    register("date").onChange(e);
+                    handleChange(e);
+                  }}
                   type="date"
-                  className={`${styles.date} rounded border-2 border-slate-200 px-1`}
-                  name="Date"
+                  className={`${styles.date} rounded border-2 border-slate-200 px-1 pl-2`}
+                  name="date"
                   id="date"
+                  value={formData.date}
                 ></input>
-
-                <label className={`${styles.select2}`} htmlFor="Time">
+                {errors.date && (
+                  <p className="text-red-600">Choose a valid date.</p>
+                )}
+                <label className={`${styles.select2}`} htmlFor="time">
                   Select Time:
                 </label>
                 <select
-                  {...register("Time")}
-                  className={`${styles.time} rounded border-2 border-slate-200 px-1`}
-                  name="Time"
+                  {...register("time")}
+                  onChange={(e) => {
+                    register("time").onChange(e);
+                    handleChange(e);
+                  }}
+                  className={`${styles.time} rounded border-2 border-slate-200 px-1 pl-2`}
+                  name="time"
                   id="time"
+                  value={formData.time}
                 >
-                  <option value="1">01:00 PM</option>
-                  <option value="2">02:00 PM</option>{" "}
-                  <option value="3">03:00 PM</option>{" "}
-                  <option value="4">04:00 PM</option>{" "}
-                  <option value="5">05:00 PM</option>{" "}
-                  <option value="6">06:00 PM</option>{" "}
-                  <option value="7">07:00 PM</option>{" "}
-                  <option value="8">08:00 PM</option>
+                  {listofTimes}
                 </select>
+                {errors.time && (
+                  <p className="text-red-600">Choose an available time.</p>
+                )}
               </div>
               <label htmlFor="comment">Comment box:</label>
               <textarea
-                {...register("Comment")}
+                value={formData.comment}
                 className={`rounded border-2 border-slate-200 pl-2`}
-                name="comment"
                 id="comment"
+                cols={30}
+                rows={5}
+                {...register("comment")}
+                onChange={(e) => {
+                  register("comment").onChange(e);
+                  handleChange(e);
+                }}
               ></textarea>
-              {errors.Comment && <p>{errors.Comment.message}</p>}
               <div className="my-2 grid place-self-center">
                 {" "}
                 <button
