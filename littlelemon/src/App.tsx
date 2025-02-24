@@ -5,6 +5,9 @@ import Footer from "./components/Footer/Footer";
 import Homepage from "./components/pages/Homepage/Homepage";
 import Bookingpage from "./components/pages/Bookingpage/Bookingpage";
 import Success from "./components/pages/Bookingpage/ConfirmedBooking/Success";
+import About from "./components/pages/Aboutpage/About";
+import Loginpage from "./components/pages/Loginpage/Loginpage";
+import Menupage from "./components/pages/Menupage/Menupage";
 function App() {
   type formtype = {
     name: string;
@@ -76,6 +79,10 @@ function App() {
           ></Route>
           <Route path="Success" element={<Success></Success>}></Route>
         </Route>
+        <Route path="/About" element={<About></About>}></Route>
+        <Route path="/Login" element={<Loginpage></Loginpage>}></Route>
+        <Route path="/Menu" element={<Menupage></Menupage>}></Route>
+        <Route path="/Order" element={<Menupage></Menupage>}></Route>
       </Routes>
       <Footer></Footer>
     </>
