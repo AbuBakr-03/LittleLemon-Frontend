@@ -1,8 +1,8 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-import Main from "./components/Main/Main";
-import Reservation from "./components/Reservation/Reservation";
+import Main from "./components/pages/Homepage/Main";
+import Reservation from "./components/pages/Bookingpage/Bookingform";
 import Success from "./components/Success/Success";
 function App() {
   return (

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import styles from "./Reservation.module.css";
+import styles from "./Bookingform.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header/Header";
+import Header from "../../Header/Header";
 const Reservation: React.FC = () => {
   const [count, setCount] = useState<number>(1);
   const navigate = useNavigate();
