@@ -1,7 +1,8 @@
-import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 import pic from "../../assets/restauranfood.jpg";
 import styles from "./Jumbotron.module.css";
 const Jumbotron: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className={`grid justify-items-center ${styles.bg}`}>
       <article className={`grid w-9/12 gap-6 py-6 md:grid-cols-2`}>
@@ -20,7 +21,14 @@ const Jumbotron: React.FC = () => {
             time!
           </p>
           <div className={`grid justify-start`}>
-            <Button text="Reserve a Table" />
+            <button
+              onClick={() => {
+                navigate("/Reservations");
+              }}
+              className={`${styles.buttonbg} my-1 rounded-xl border-2 px-4 py-1 font-markazi text-xl transition-all duration-300 hover:bg-white`}
+            >
+              Reserve a Table
+            </button>{" "}
           </div>
         </div>
         <div className={`grid place-items-center`}>

@@ -4,16 +4,17 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Main from "./components/Main/Main";
 import Reservation from "./components/Reservation/Reservation";
+import Success from "./components/Success/Success";
 function App() {
   return (
     <>
       <Header></Header>
       <Routes>
         <Route path="/" element={<Main></Main>}></Route>
-        <Route
-          path="/Reservations"
-          element={<Reservation></Reservation>}
-        ></Route>
+        <Route path="/Reservations">
+          <Route index element={<Reservation></Reservation>}></Route>
+          <Route path="Success" element={<Success></Success>}></Route>
+        </Route>
       </Routes>
       <Footer></Footer>
     </>

@@ -3,12 +3,13 @@ import Logo from "../../assets/Logo.svg";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOnClickOutside } from "usehooks-ts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Nav.module.css";
 const Nav: React.FC = () => {
   const [mobile, setmobile] = useState<boolean>(false);
   const [menu, setmenu] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   const handlemenu = () => {
     setmenu(true);
@@ -61,6 +62,9 @@ const Nav: React.FC = () => {
             </div>
             <div className="grid justify-center">
               <img
+                onClick={() => {
+                  navigate("/");
+                }}
                 className={`h-12 cursor-pointer`}
                 src={Logo}
                 alt="Little Lemon"
@@ -79,14 +83,14 @@ const Nav: React.FC = () => {
                   className="fixed left-0 top-0 z-50 h-full w-4/5 max-w-xs bg-white shadow-lg"
                 >
                   <div className="flex items-center justify-between border-b p-4">
-                    <p className="font-markazi pl-2 text-3xl font-medium">
+                    <p className="pl-2 font-markazi text-3xl font-medium">
                       Menu
                     </p>
                     <button onClick={() => handleClickOutside()}>
                       <X size={28} />
                     </button>
                   </div>
-                  <ul className="font-markazi grid gap-2 p-4 text-2xl">
+                  <ul className="grid gap-2 p-4 font-markazi text-2xl">
                     <li
                       className={`rounded border-b-2 pl-2 transition-all duration-300 hover:bg-slate-200`}
                     >
@@ -126,9 +130,12 @@ const Nav: React.FC = () => {
         </>
       ) : (
         <>
-          <nav className={`font-markazi w-9/12 text-lg font-semibold`}>
+          <nav className={`w-9/12 font-markazi text-lg font-semibold`}>
             <ul className={`${styles.container} py-4 font-medium`}>
               <img
+                onClick={() => {
+                  navigate("/");
+                }}
                 className={`${styles.logo} place-self-center`}
                 src={Logo}
                 alt="LittleLemon"
