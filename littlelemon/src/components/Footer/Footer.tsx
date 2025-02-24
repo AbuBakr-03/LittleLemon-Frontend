@@ -12,12 +12,12 @@ const Footer: React.FC = () => {
           <img className={`${styles.img}`} src={Logo} alt="" />
         </div>
         <ul className={`${styles.nav}`}>
-          <li className={`font-markazi mb-3 text-2xl font-medium`}>
+          <li className={`mb-3 font-markazi text-2xl font-medium`}>
             Navigation
           </li>
-          <div className={`font-karla grid gap-1`}>
+          <div className={`grid gap-1 font-karla`}>
             <li>
-              <Link to={"/Home"}>Home</Link>
+              <Link to={"/"}>Home</Link>
             </li>
             <li>
               <Link to={"/About"}>About</Link>
@@ -37,18 +37,18 @@ const Footer: React.FC = () => {
           </div>
         </ul>
         <ul className={`${styles.address}`}>
-          <li className={`font-markazi mb-3 text-2xl font-medium`}>Contact</li>
-          <div className={`font-karla grid gap-1`}>
+          <li className={`mb-3 font-markazi text-2xl font-medium`}>Contact</li>
+          <div className={`grid gap-1 font-karla`}>
             <li>Address: 123 Mediterranean Lane, Chicago, IL 60601</li>
             <li>Phone: (312) 555-7890</li>
             <li>Email: contact@littlelemon.com</li>
           </div>
         </ul>
         <ul className={`${styles.social}`}>
-          <li className={`font-markazi mb-3 text-2xl font-medium`}>
+          <li className={`mb-3 font-markazi text-2xl font-medium`}>
             Social Media Links
           </li>
-          <div className={`font-karla grid gap-1`}>
+          <div className={`grid gap-1 font-karla`}>
             <li>
               <Link to={"/Facebook"}>Facebook</Link>
             </li>
