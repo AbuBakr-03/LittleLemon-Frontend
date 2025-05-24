@@ -1,2 +1,2 @@
 # LittleLemon
-Front-End Project
+Backend Project for Meta Back-End Developer Certification
